@@ -3,9 +3,10 @@
     - `block.c`: 
 
 ## Functions
-    ### Block.c
+
+### Block.c
     - `bread`:
     - `bwrite`:
-    ### image.c
+### image.c
     - 'image_open'
     - `image_close`
