@@ -1,20 +1,31 @@
+
 CCOPTS=-Wall -Wextra
 CC=gcc
 
-testfs: block.o image.o
+.PHONY: clean pristine test
+
+all: testfs 
+
+testfs: testfs.o libvvsfs.a
 	$(CC) $(CCOPTS) $^ -o $@
 
 testfs.o: testfs.c
-	$(CC) $(CCOPTS) -c testfs.c $<
+	$(CC) $(CCOPTS) -c $< -o $@
 
-image.o: image.c
-	$(CC) $(CCOPTS) -c image.c $<
+image.o: image.c image.h
+	$(CC) $(CCOPTS) -c $< -o $@
 
-block.o: block.c
-	$(CC) $(CCOPTS) -c block.c $<
+block.o: block.c block.h
+	$(CC) $(CCOPTS) -c $< -o $@
 
 libvvsfs.a: block.o image.o
 	ar rcs $@ $^
 
-myexec: testfs.o libvvsfs.a
-	$(CC) -o $@ $^
+clean:
+	rm -f *.o 
+
+pristine: clean
+	rm -f testfs *.a
+
+test: testfs
+	./testfs
