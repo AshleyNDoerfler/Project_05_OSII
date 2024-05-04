@@ -1,6 +1,8 @@
 #include "image.h"
 #include "block.h"
-#include <testfs.h>
+#include "testfs.h"
+#include <stdio.h>
+
 
 #ifdef CTEST_ENABLE
 
