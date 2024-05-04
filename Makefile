@@ -4,9 +4,9 @@ CC=gcc
 
 .PHONY: clean pristine test
 
-all: testfs 
+all: main 
 
-testfs: testfs.o libvvsfs.a
+main: testfs.o libvvsfs.a
 	$(CC) $(CCOPTS) $^ -o $@
 
 testfs.o: testfs.c
@@ -27,5 +27,7 @@ clean:
 pristine: clean
 	rm -f testfs *.a
 
-test: testfs
-	./testfs
+test: testfs.c
+	@gcc $(CCOPTS) -DCTEST_ENABLE -o testfs $^
+	@./testfs
+	@rm -f testfs

@@ -37,9 +37,22 @@ int main(){
 #else
 
 int main(){
+    
+    // Test image open
+    image_open("filesystem.img", 1);
+    // Test image close
+    image_close();
+    
+    unsigned char buffer[BLOCK_SIZE];
+    // Test block bread
+    bread(0, buffer);
 
-    printf("Testfs is not enabled\n");
-    printf("TODO");
+    // Test block bwrite
+    bwrite(0, buffer);
+
+    // Print success message
+    printf("Testfs is working\n");
+    return 0;
 }
 
 #endif
